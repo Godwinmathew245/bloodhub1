@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blood Hub - Settings</title>
+  <style>
+    /* General Reset and Body Styling */
+    body {
+      font-family: 'Roboto', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f3f4f6;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    /* Container Styling */
+    .container {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 30px;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Headers */
+    h1 {
+      font-size: 2rem;
+      text-align: center;
+      color: #2c3e50;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      color: #34495e;
+      border-bottom: 2px solid #e74c3c;
+      padding-bottom: 5px;
+    }
+
+    /* Form Elements */
+    label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 8px;
+      color: #555;
+    }
+
+    input, select, button, textarea {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 20px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: 0.3s;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: #e74c3c;
+      outline: none;
+      box-shadow: 0 0 5px rgba(231, 76, 60, 0.5);
+    }
+
+    button {
+      background-color: #e74c3c;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #c0392b;
+    }
+
+    /* Toggle Groups */
+    .toggle-group {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .toggle-group label {
+      margin: 0;
+    }
+
+    .toggle-group input[type="checkbox"] {
+      transform: scale(1.2);
+      margin-left: 10px;
+    }
+
+    /* Address Management */
+    .action-buttons {
+      display: flex;
+      gap: 10px;
+    }
+
+    .action-buttons button {
+      flex: 1;
+    }
+
+    /* Section Styling */
+    .section {
+      margin-bottom: 40px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .section:last-child {
+      border-bottom: none;
+    }
+
+    /* Privacy Checkboxes */
+    label input[type="checkbox"] {
+      margin-right: 10px;
+      transform: scale(1.2);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 600px) {
+      .container {
+        padding: 20px;
+      }
+
+      h1 {
+        font-size: 1.8rem;
+      }
+
+      h2 {
+        font-size: 1.3rem;
+      }
+
+      input, select, button, textarea {
+        font-size: 0.9rem;
+      }
+
+      button {
+        font-size: 0.9rem;
+      }
+    }
+</style>
+</head>
+<body>
+  <div class="container">
+    <h1>Settings</h1>
+
+    <!-- Account Settings -->
+    <div class="section">
+      <h2>Account Settings</h2>
+      <label for="name">Name</label>
+      <input type="text" id="name" placeholder="Enter your name">
+      <label for="password">Password</label>
+      <input type="text" id="password" placeholder="Enter your password">
+      <label for="re-enter">Re-enter Password</label>
+      <input type="text" id="re-enter" placeholder="Re-Enter your Password">
+      <button>Change Password</button>
+      <button>Save Changes</button>
+    </div>
+
+    <!-- Address Management -->
+    <div class="section">
+      <h2>Address Management</h2>
+      <label>Saved Address 1:</label>
+      <p>124 Street, City, State</p>
+      <div class="action-buttons">
+        <button>Edit</button>
+        <button>Delete</button>
+      </div>
+      <button>Add New Address</button>
+    </div>
+
+    <!-- Notification Preferences -->
+    <div class="section">
+      <h2>Notification Preferences</h2>
+      <div class="toggle-group">
+        <label for="email alerts">Email Alerts</label>
+        <input type="checkbox" id="email-alerts" class="toggle">
+      </div>
+      <div class="toggle-group">
+        <label for="sms alerts">SMS Alerts</label>
+        <input type="checkbox" id="sms-alerts" class="toggle">
+      </div>
+      <button>Save Preferences</button>
+    </div>
+
+    <!-- Emergency Contact Information -->
+    <div class="section">
+      <h2>Emergency Contact Information</h2>
+      <label for="contact-name">Contact Name</label>
+      <input type="text" id="contact-name" placeholder="Enter contact name">
+      <label for="contact-phone">Contact Phone</label>
+      <input type="tel" id="contact-phone" placeholder="Enter contact number">
+      <label for="relationship">Relationship</label>
+      <select id="relationship">
+        <option value="family">Family</option>
+        <option value="friend">Friend</option>
+        <option value="colleague">Colleague</option>
+      </select>
+      <button>Save Changes</button>
+    </div>
+
+    <!-- Privacy Settings -->
+    <div class="section">
+      <h2>Privacy Settings</h2>
+      <label>
+        <input type="checkbox"> Allow sharing my contact information with donors/recipients in emergencies.
+      </label>
+      <label>
+        <input type="checkbox"> Make my profile searchable for blood donation requests.
+      </label>
+      <button>Save Changes</button>
+    </div>
+
+    <!-- Account Actions -->
+    <div class="section">
+      <h2>Account Actions</h2>
+      <button>Deactivate Account</button>
+      <button>Delete Account</button>
+      <button>Log Out</button>
+    </div>
+  </div>
+</body>
+<script>
+    // JavaScript function to go back to the previous page
+    function goBack() {
+        window.history.back();}
+        function toggleMenu() {
+    const menuContainer = document.querySelector('.menu-container');
+    menuContainer.classList.toggle('show');
+}
+
+</script>
+</html>

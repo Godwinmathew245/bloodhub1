@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Request a Blood Donor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+        }
+         /* Back Arrow Button Styles */
+  .back-arrow-container {
+    position: fixed;
+    top: 10px; /* Position at the top */
+    left: 10px; /* Position at the left */
+    z-index: 1000; /* Ensure it stays above other elements */
+}
+
+.back-arrow-button {
+    background-color: #e52b50; /* Matches your theme */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Space between arrow and text */
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.back-arrow-button:hover {
+    background-color: #c0392b;
+    transform: scale(1.05); /* Slightly enlarge the button on hover */
+}
+
+.back-arrow-button:active {
+    transform: scale(0.95); /* Add pressed effect */
+}
+
+        header {
+            background-color: #d9534f;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+        section {
+            max-width: 600px;
+            margin: 2rem auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+        }
+        h2 {
+            color: #d9534f;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-top: 1rem;
+            font-weight: bold;
+        }
+        input, select, textarea {
+            margin-top: 0.5rem;
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            margin-top: 1.5rem;
+            padding: 0.7rem;
+            background-color: #d9534f;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #c9302c;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Blood Donor Request Portal</h1>
+    </header>
+
+    <section id="request">
+        <h2>Request a Blood Donor</h2>
+        <form id="requestForm">
+            <label for="fullName">Full Name:</label>
+            <input type="text" id="fullName" name="fullName" placeholder="Enter your name" required>
+
+            <label for="bloodGroup">Blood Group:</label>
+            <select id="bloodGroup" name="bloodGroup" required>
+                <option value="">Select blood group</option>
+                <option value="A+">A+</option>
+                <option value="A-">A-</option>
+                <option value="B+">B+</option>
+                <option value="B-">B-</option>
+                <option value="O+">O+</option>
+                <option value="O-">O-</option>
+                <option value="AB+">AB+</option>
+                <option value="AB-">AB-</option>
+            </select>
+
+            <label for="contactNumber">Contact Number:</label>
+            <input type="tel" id="contactNumber" name="contactNumber" placeholder="Enter your contact number" required>
+
+            <label for="hospital">Hospital/Clinic Name:</label>
+            <input type="text" id="hospital" name="hospital" placeholder="Enter the hospital name" required>
+
+            <label for="address">Address:</label>
+            <textarea id="address" name="address" rows="3" placeholder="Enter the address where blood donation is required" required></textarea>
+
+            <label for="notes">Additional Notes:</label>
+            <textarea id="notes" name="notes" rows="3" placeholder="Any special instructions"></textarea>
+
+            <button type="button" onclick="submitRequest()">Submit Request</button>
+        </form>
+    </section>
+
+    <script>
+        function submitRequest() {
+            const form = document.getElementById('requestForm');
+
+            // Extract form data
+            const formData = {
+                fullName: form.fullName.value,
+                bloodGroup: form.bloodGroup.value,
+                contactNumber: form.contactNumber.value,
+                hospital: form.hospital.value,
+                address: form.address.value,
+                notes: form.notes.value
+            };
+
+            // Simple validation check
+            if (!formData.fullName || !formData.bloodGroup || !formData.contactNumber || !formData.hospital || !formData.address) {
+                alert('Please fill out all required fields.');
+                return;
+            }
+
+            // Display the data (in real applications, you would send it to a backend server)
+            alert(`Request Submitted Successfully!\n\nDetails:\nName: ${formData.fullName}\nBlood Group: ${formData.bloodGroup}\nContact: ${formData.contactNumber}\nHospital: ${formData.hospital}\nAddress: ${formData.address}\nNotes: ${formData.notes || 'N/A'}`);
+
+            // Optionally, clear the form
+            form.reset();
+           
+            // JavaScript function to go back to the previous page
+    function goBack() {
+        window.history.back();
+    }
+        function toggleMenu() {
+    const menuContainer = document.querySelector('.menu-container');
+    menuContainer.classList.toggle('show');
+        }
+    
+    }
+
+    </script>
+</body>
+
+</html>

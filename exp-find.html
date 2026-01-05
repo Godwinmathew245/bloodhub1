@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find a Blood Donor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        header {
+            background-color: #d9534f;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+        }
+        section {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #d9534f;
+            margin-bottom: 1rem;
+        }
+        .search-form {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .search-form input, .search-form select, .search-form button {
+            flex: 1 1 calc(33% - 1rem);
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+        }
+        .search-form button {
+            background-color: #d9534f;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .search-form button:hover {
+            background-color: #c9302c;
+        }
+        .donor-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        .donor-card {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .donor-card img {
+            max-width: 100%;
+            border-radius: 50%;
+            height: 150px;
+            width: 150px;
+            object-fit: cover;
+            margin-bottom: 1rem;
+        }
+        .donor-card h3 {
+            margin: 0.5rem 0;
+        }
+        .donor-card p {
+            margin: 0.3rem 0;
+        }
+        .donor-card .contact-btn {
+            margin-top: 1rem;
+            padding: 0.5rem;
+            background-color: #d9534f;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .donor-card .contact-btn:hover {
+            background-color: #c9302c;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background-color: #f7f7f7;
+            margin-top: 2rem;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Find a Blood Donor</h1>
+    </header>
+
+    <section>
+        <h2>Search for Donors</h2>
+        <form class="search-form" id="searchForm">
+            <input type="text" id="location" name="location" placeholder="Enter your location" required>
+            <select id="bloodGroup" name="bloodGroup" required>
+                <option value="">Select blood group</option>
+                <option value="A+">A+</option>
+                <option value="A-">A-</option>
+                <option value="B+">B+</option>
+                <option value="B-">B-</option>
+                <option value="O+">O+</option>
+                <option value="O-">O-</option>
+                <option value="AB+">AB+</option>
+                <option value="AB-">AB-</option>
+            </select>
+            <button type="button" onclick="findDonors()">Find Donors</button>
+        </form>
+
+        <div class="donor-list" id="donorList">
+            <!-- Donor cards will be dynamically populated here -->
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Blood Donor Portal. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Sample donor data (this would typically come from a backend API)
+        const donors = [
+            {
+                name: "Manish Joshi",
+                bloodGroup: "A+",
+                location: "jaipur",
+                contact: "8290282864",
+                image: "C:\Users\lenovo\Downloads\manish.jpeg"
+            },
+            {
+                name: "Krishna",
+                bloodGroup: "O+",
+                location: "ajmer",
+                contact: "88244033837",
+                image: "C:\Users\lenovo\Downloads\DALL·E 2024-11-23 19.32.44 - An infographic-style image for blood donor location with a focus on a logo icon. The logo includes a red pin-drop symbol with a blood drop inside it, .webp"
+            },
+            {
+                name: "Godwin",
+                bloodGroup: "B-",
+                location: "kerela",
+                contact: "8104478962",
+                image: "C:\Users\nitro\OneDrive\Desktop\bloodhubfinal"
+            }
+        ];
+
+        // Function to find and display matching donors
+        function findDonors() {
+            const location = document.getElementById('location').value.toLowerCase();
+            const bloodGroup = document.getElementById('bloodGroup').value;
+
+            // Filter donors based on user input
+            const matchingDonors = donors.filter(donor => 
+                donor.location.toLowerCase().includes(location) && 
+                donor.bloodGroup === bloodGroup
+            );
+
+            // Get the donor list container
+            const donorList = document.getElementById('donorList');
+            donorList.innerHTML = ''; // Clear previous results
+
+            if (matchingDonors.length > 0) {
+                matchingDonors.forEach(donor => {
+                    const donorCard = document.createElement('div');
+                    donorCard.className = 'donor-card';
+                    donorCard.innerHTML = `
+                        <img src="${donor.image}" alt="${donor.name}">
+                        <h3>${donor.name}</h3>
+                        <p><strong>Blood Group:</strong> ${donor.bloodGroup}</p>
+                        <p><strong>Location:</strong> ${donor.location}</p>
+                        <button class="contact-btn" onclick="alert('Contact: ${donor.contact}')">Contact</button>
+                    `;
+                    donorList.appendChild(donorCard);
+                });
+            } else {
+                donorList.innerHTML = '<p>No matching donors found.</p>';
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blood Donation Hub</title>
+    <style>
+        /* General Body and Font Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+    line-height: 1.6;
+}
+  /* Back Arrow Button Styles */
+  .back-arrow-container {
+    position: fixed;
+    top: 10px; /* Position at the top */
+    left: 10px; /* Position at the left */
+    z-index: 1000; /* Ensure it stays above other elements */
+}
+
+.back-arrow-button {
+    background-color: #e52b50; /* Matches your theme */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Space between arrow and text */
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.back-arrow-button:hover {
+    background-color: #c0392b;
+    transform: scale(1.05); /* Slightly enlarge the button on hover */
+}
+
+.back-arrow-button:active {
+    transform: scale(0.95); /* Add pressed effect */
+}
+
+
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+h1, h2 {
+    font-family: 'Helvetica', sans-serif;
+    font-weight: 700;
+}
+
+ul {
+    list-style: none;
+}
+
+/* Header Styles */
+header {
+    background-color:white;
+    padding: 20px 0;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.navbar img {
+    max-width: 60px;
+    height: auto;
+    border-radius: 50%;
+}
+/* Three-Dot Menu */
+.menu-container {
+    position: fixed;
+    top: 10px;
+    right: 10px; /* Positioned to the top-right corner */
+    z-index: 1000;
+}
+
+.three-dot-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 20px;
+    width: 25px;
+}
+
+.three-dot-button span {
+    display: block;
+    height: 4px;
+    width: 25px;
+    background-color: #333;
+    border-radius: 2px;
+    transition: background-color 0.3s;
+}
+
+.three-dot-button:hover span {
+    background-color: #c0392b;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 40px;
+    right: 0;
+    background-color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    overflow: hidden;
+    width: 150px;
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: #0a0a0a;
+    font-size: 1em;
+}
+
+
+.dropdown-menu a:hover {
+    background-color: #f0f0f0;
+}
+
+/* Show the dropdown menu when toggled */
+.menu-container.show .dropdown-menu {
+    display: block;
+}
+
+
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: rgb(254, 5, 5);
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+nav ul li {
+    padding: 8px 16px;
+    border-radius: 30px;
+}
+
+nav ul li a {
+    color: white;
+    font-size: 1.1rem;
+    padding: 8px 16px;
+    border-radius: 25px;
+}
+
+nav ul li a:hover {
+    background-color: #a71d2a;
+    color: #fff;
+}
+
+/* Hero Section */
+#hero {
+    background: linear-gradient(45deg, #ff6b6b, #c82333);
+    color: white;
+    text-align: center;
+    padding: 80px 20px;
+}
+
+.hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.hero-content h1 {
+    font-size: 3.2rem;
+    margin-bottom: 20px;
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+}
+
+.hero-banner {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Request Section */
+#request {
+    text-align: center;
+    margin: 40px 0;
+}
+
+#request h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.action-btn {
+    background-color: #c82333;
+    color: white;
+    font-size: 1.1rem;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.action-btn:hover {
+    background-color: #a71d2a;
+    transform: scale(1.05);
+}
+
+/* Cards Section (Find Donors) */
+#find {
+    background-color: #f5f5f5;
+    padding: 50px 20px;
+    text-align: center;
+}
+
+#find h2 {
+    font-size: 2rem;
+    margin-bottom: 30px;
+}
+
+.cards-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.card {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    width: 250px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.card .icon {
+    background-color: #c82333;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin: 0 auto 20px;
+}
+
+.card p {
+    font-size: 1.1rem;
+}
+
+/* Contact Section */
+#contact {
+    padding: 40px 20px;
+    text-align: center;
+    background-color: #fff;
+}
+
+#contact h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+#contact p {
+    font-size: 1.1rem;
+}
+
+#contact a {
+    color: #c82333;
+    font-weight: bold;
+}
+
+/* About Section */
+#about {
+    padding: 40px 20px;
+    text-align: center;
+}
+
+#about h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+#about p {
+    font-size: 1.1rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Footer Styles */
+footer {
+    background-color: #212529;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .cards-container {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+
+    .action-btn {
+        font-size: 1rem;
+    }
+
+    .card {
+        width: 100%;
+        margin: 0 auto;
+    }
+}
+
+
+    </style>
+    
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <img src="bloodhub.jpeg" alt="Blood Donation Banner" class="banner">
+            <div class="logo">Blood Donation</div>
+            <nav>
+                  <!-- Back Arrow Button -->
+<div class="back-arrow-container">
+    <button class="back-arrow-button" onclick="goBack()">
+        &#8592; Back
+    </button>
+</div>
+   <!-- Three-Dot Menu -->
+     <div class="menu-container">
+        <button class="three-dot-button" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <div class="dropdown-menu">
+            <a href="exp-req02.html">Request Blood</a>
+            <a href="exp-find.html">Find Donor</a>
+            <a href="exp-about.html">About</a>
+            <a href="contact.html">Contact</a>
+            <a href="setting.html">Settings</a>
+            <a href="tracking.html">Order Tracking</a>
+            <a href="exp-reg02.html">Login</a>
+            <a href="#logout">Logout</a>
+        </div>
+
+                    
+            </body>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section with Image -->
+        
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero">
+            <div class="hero-content">
+                <h1>Blood Donation</h1>
+                <div class="blood-icon"></div>
+                <p>Your contribution can save lives. Join the community today!</p>
+                <img src="blood-donation.jpg" alt="Blood Donation Hero Image" class="hero-banner">
+            </div>
+        </section>
+
+        <section id="request">
+            <h2>Request Donor</h2>
+            <button class="action-btn">Submit Request</button>
+        </section>
+
+        <section id="find">
+            <h2>Find Donors</h2>
+            <div class="cards-container">
+                <div class="card">
+                    <div class="icon blood-icon"><img src="DONOR INFO.png" alt="Donor Info Icon" class="card-icon"></div>
+                    <p>Donor Information</p>
+                </div>
+                <div class="card">
+                    <div class="icon blood-icon"><img src="DONOR DETAILS.png" alt="Donor Details Icon" class="card-icon"></div>
+                    <p>Donor Details</p>
+                </div>
+                <div class="card">
+                    <div class="icon blood-icon"><img src="DONOR LOCATION.png" alt="Donor Location Icon" class="card-icon"></div>
+                    <p>Donor Location</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2>Contact</h2>
+            <p>Email: <a href="mailto:bloodhub04@gmail.com">bloodhub04@gmail.com</a></p>
+        </section>
+
+        <section id="about">
+            <h2>About</h2>
+            <p>We connect blood donors with recipients, ensuring quick and reliable matches for emergencies.</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Blood Donation Hub. All rights reserved.</p>
+    </footer>
+</body>
+<script>
+    // JavaScript function to go back to the previous page
+    function goBack() {
+        window.history.back();}
+        function toggleMenu() {
+    const menuContainer = document.querySelector('.menu-container');
+    menuContainer.classList.toggle('show');
+}
+
+</script>
+</html>
+

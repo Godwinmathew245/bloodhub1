@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blood Delivery Order Tracking</title>
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+header {
+    background-color: #d91f4c;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+.container {
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+label {
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+input[type="text"] {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+}
+
+input[type="text"]:focus {
+    border-color: #d91f4c;
+}
+
+button {
+    padding: 12px 15px;
+    background-color: #d91f4c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #c2183b;
+}
+
+.status {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #e9f7fa;
+    border-radius: 5px;
+    display: none;
+}
+
+footer {
+    text-align: center;
+    padding: 15px;
+    background-color: #333;
+    color: white;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+</style>
+</head>
+<body>
+
+    <header>
+        <h1>Track Your Blood Delivery Order</h1>
+        <p>Enter your tracking number below to check the status of your blood delivery.</p>
+    </header>
+
+    <div class="container">
+        <form id="trackingForm">
+            <label for="trackingNumber">Enter Tracking Number:</label>
+            <input type="text" id="trackingNumber" name="trackingNumber" placeholder="Tracking Number" required>
+            <button type="submit">Track Order</button>
+        </form>
+
+        <div id="orderStatus" class="status">
+            <p id="statusMessage"></p>
+        </div>
+    
+
+    <footer>
+        <p>Blood Delivery Service &copy; 2024</p>
+    </footer>
+
+    <script src="blood.js"></script>
+
+</body>
+</html>
